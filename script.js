@@ -42,3 +42,17 @@ $(document).on('click', '#toggle', function(event){
     startCycle();
   }
 })
+
+$(document).on('click', '#add', function(event){
+  const fieldset = $(".fieldset:first").clone();
+  const index = $('.fieldset').length;
+
+  fieldset.find('input[type=range]').prop('name', `section[${index}]tempo`)
+  fieldset.find('input[type=number]').prop('name', `section[${index}]bars`)
+
+  fieldset.appendTo(".sections");
+})
+
+$(document).on('click', '#remove', function(event){
+  $(".fieldset:last").remove();
+})

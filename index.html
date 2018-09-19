@@ -6,34 +6,42 @@
 
 <body>
 
-  <fieldset>
-    <legend>Section One</legend>
-    <label>
-      <span>Tempo</span>
-      <input
-        class="tempo"
-        name='section[0]tempo'
-        type='range'
-        min="100"
-        max="200"
-        value="120"
-        step="10"
-      />
-    </label>
+  <div class="sections">
+    <fieldset class="fieldset">
+      <legend>Section One</legend>
+      <label>
+        <span>Tempo</span>
+        <input
+          class="tempo"
+          name='section[0]tempo'
+          type='range'
+          min="100"
+          max="200"
+          value="120"
+          step="10"
+        />
+      </label>
 
-    <label>
-      <span>No. of Bars</span>
-      <input
-        class="bars"
-        name='section[0]bars'
-        type='number'
-        value="4"
-      />
-    </label>
-  </fieldset>
+      <label>
+        <span>No. of Bars</span>
+        <input
+          class="bars"
+          name='section[0]bars'
+          type='number'
+          value="4"
+        />
+      </label>
+    </fieldset>
+  </div>
 
-  <div id='add'>+</div>
-
-  <button data-active='false' id='toggle'>Start</button>
+  <div class="actions">
+    <div>
+      <button id='add'>+</button>
+      <button id='remove'>-</button>
+    </div>
+    <div>
+      <button data-active='false' id='toggle'>Start</button>
+    </div>
+  </div>
 
 </body>
