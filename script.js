@@ -14,7 +14,6 @@ var initializeOscillator = function(){
 
 
 $(document).on('click', '#toggle', function(event){
-  console.log($(this).data())
   if ($(this).data().active) {
     $(this).data('active', false)
     oscillator.stop()
