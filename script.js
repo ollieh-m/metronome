@@ -14,14 +14,13 @@ var initializeOscillator = function(){
 
 
 $(document).on('click', '#toggle', function(event){
+  console.log($(this).data())
   if ($(this).data().active) {
-    $(this).data('active', 'false')
+    $(this).data('active', false)
     oscillator.stop()
   } else {
-    if (oscillator == undefined) {
-      initializeOscillator();
-    }
-    $(this).data('active', 'true')
+    initializeOscillator();
+    $(this).data('active', true)
     oscillator.start();
   }
 })
