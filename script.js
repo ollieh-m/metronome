@@ -1,6 +1,8 @@
 let interval;
 
 const startCycle = (section) => {
+  const counter = $(section.element).find('input[type=number]').next()
+
   return new Promise(resolve => {
     const tempo = section.tempo;
     let beeps = section.bars*4;
@@ -22,9 +24,13 @@ const startCycle = (section) => {
 
       beeps--;
 
+      if (beeps % 4 === 0) {
+        const barsLeft = parseInt(counter.text()) - 1
+        counter.text(barsLeft)
+      }
+
       if (beeps === 0) {
-        $('#toggle').text("Start")
-        $('#toggle').data('active', false);
+        counter.text(section.bars)
         clearInterval(interval);
         resolve();
       }
@@ -33,33 +39,36 @@ const startCycle = (section) => {
 }
 
 $(document).on('click', '#toggle', async function(event){
-
-  let data = [];
-
-  $('.fieldset').each(function(index, item) {
-    data = [
-      ...data,
-      {
-        tempo: $(this).find('input[type=range]').val(),
-        bars: $(this).find('input[type=number]').val(),
-        element: item
-      }
-    ]
-  });
-
   if ($(this).data().active) {
     $(this).text("Start")
     $(this).data('active', false);
+    $(".active").toggleClass("active")
     clearInterval(interval);
   } else {
     $(this).text("Stop");
     $(this).data('active', true)
+    
+    let data = [];
+
+    $('.fieldset').each(function(index, item) {
+      data = [
+        ...data,
+        {
+          tempo: $(this).find('input[type=range]').val(),
+          bars: $(this).find('input[type=number]').val(),
+          element: item
+        }
+      ]
+    });
 
     for (let section of data) {
-      section.element.classList.toggle('active')
+      section.element.classList.add('active')
       await startCycle(section)
-      section.element.classList.toggle('active')
+      section.element.classList.remove('active')
     }
+    
+    $('#toggle').text("Start")
+    $('#toggle').data('active', false);
   }
 })
 
@@ -79,5 +88,9 @@ $(document).on('click', '#remove', function(event){
 })
 
 $(document).on('change', 'input#tempo', function(event){
+  $(this).next().text(event.target.value)
+});
+
+$(document).on('change', 'input#bars', function(event){
   $(this).next().text(event.target.value)
 });
