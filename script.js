@@ -74,3 +74,7 @@ $(document).on('click', '#add', function(event){
 $(document).on('click', '#remove', function(event){
   $(".fieldset:last").remove();
 })
+
+$(document).on('change', 'input#tempo', function(event){
+  $(this).next().text(event.target.value)
+});
