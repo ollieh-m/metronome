@@ -36,12 +36,13 @@ $(document).on('click', '#toggle', async function(event){
 
   let data = [];
 
-  $('.fieldset').each(function(item) {
+  $('.fieldset').each(function(index, item) {
     data = [
       ...data,
       {
         tempo: $(this).find('input[type=range]').val(),
-        bars: $(this).find('input[type=number]').val()
+        bars: $(this).find('input[type=number]').val(),
+        element: item
       }
     ]
   });
@@ -55,7 +56,9 @@ $(document).on('click', '#toggle', async function(event){
     $(this).data('active', true)
 
     for (let section of data) {
+      section.element.classList.toggle('active')
       await startCycle(section)
+      section.element.classList.toggle('active')
     }
   }
 })
